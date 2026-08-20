@@ -2,8 +2,8 @@
 
 Black-background 18-slide deck (preferred). Regenerated from `generate_deck.py`.
 
-**Canva (black deck, imported from these slides):**  
-*(link added after Canva import)*
+**Canva (black deck — use this):**  
+https://www.canva.com/d/OAkvHlAsTbmgNDY
 
 Previous red Canva template (not used):  
 https://www.canva.com/d/Y2d1kwxCLjzJYKC
