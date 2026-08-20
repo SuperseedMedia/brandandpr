@@ -15,73 +15,108 @@ SLIDES.mkdir(exist_ok=True)
 SHOTS.mkdir(exist_ok=True)
 
 
-def logo(name: str, size: int = 36) -> str:
+def logo(name: str, size: int = 36, dark: bool = False) -> str:
     path = ASSETS / name
     if not path.exists():
         return ""
+    klass = "logo-tile dark" if dark else "logo-tile"
     return (
-        f'<img class="logo" src="../assets/logos/{name}" '
-        f'width="{size}" height="{size}" alt="">'
+        f'<span class="{klass}" style="width:{size + 20}px;height:{size + 20}px">'
+        f'<img src="../assets/logos/{name}" width="{size}" height="{size}" alt="">'
+        f"</span>"
     )
 
 
 CSS = r"""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 :root {
-  --bg: #0c1018;
-  --panel: #151b27;
-  --line: #2a3344;
-  --gold: #d4a017;
-  --gold2: #f3d27a;
-  --ink: #f4f1ea;
-  --mute: #9aa3b5;
+  --bg: #05070c;
+  --panel: #10161f;
+  --line: #243044;
+  --gold: #2ec4b6;
+  --gold2: #7ee7dc;
+  --blue: #3b82f6;
+  --ink: #f4f7fb;
+  --mute: #9aa8bc;
   --red: #ef4444;
   --ok: #34d399;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: #000; }
+html, body { background: #000; width: 1920px; height: 1080px; }
 .slide {
   width: 1920px; height: 1080px; overflow: hidden;
-  background: radial-gradient(1200px 700px at 90% -10%, #1d2433 0%, var(--bg) 55%);
+  background:
+    radial-gradient(900px 520px at 88% 12%, rgba(46,196,182,.16) 0%, transparent 58%),
+    radial-gradient(800px 480px at 8% 88%, rgba(59,130,246,.12) 0%, transparent 55%),
+    var(--bg);
   color: var(--ink); font-family: Inter, system-ui, sans-serif;
-  padding: 72px 88px 64px; position: relative;
+  padding: 48px 96px 72px 108px; position: relative;
+  display: flex; flex-direction: column;
 }
 .slide:before {
-  content:""; position:absolute; left:0; top:0; bottom:0; width:8px; background: var(--gold);
+  content:""; position:absolute; left:0; top:0; bottom:0; width:10px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--blue) 100%);
 }
-.kicker { color: var(--gold); letter-spacing: .18em; text-transform: uppercase; font-size: 18px; font-weight: 700; margin-bottom: 18px; }
-h1 { font-size: 64px; line-height: 1.08; font-weight: 800; max-width: 1600px; }
-.sub { margin-top: 18px; color: var(--mute); font-size: 28px; }
-.footer { position:absolute; left:88px; right:88px; bottom:36px; display:flex; justify-content:space-between; color:#6b7384; font-size:16px; }
-.grid { display:grid; gap: 24px; margin-top: 48px; }
+.stage {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 28px;
+}
+.head { flex: 0 0 auto; display:flex; flex-direction:column; gap: 14px; }
+.body {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.kicker {
+  color: var(--gold); letter-spacing: .22em; text-transform: uppercase;
+  font-size: 16px; font-weight: 700;
+}
+h1 { font-size: 58px; line-height: 1.12; font-weight: 800; max-width: 1640px; }
+.sub { color: var(--mute); font-size: 26px; }
+.footer {
+  position:absolute; left:108px; right:96px; bottom:28px;
+  display:flex; justify-content:space-between; align-items:center;
+  color:#6b7384; font-size:16px;
+}
+.footer .brand { display:flex; align-items:center; gap:10px; }
+.grid { display:grid; gap: 28px; }
 .cards-4 { grid-template-columns: repeat(4, 1fr); }
 .cards-3 { grid-template-columns: repeat(3, 1fr); }
 .cards-2 { grid-template-columns: 1fr 1fr; }
 .card {
-  background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 28px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 32px;
 }
-.card h3 { font-size: 26px; margin-bottom: 10px; }
-.card p, .card li { color: var(--mute); font-size: 20px; line-height: 1.35; }
-.stat { text-align:center; padding: 36px 20px; }
-.stat .n { font-size: 92px; font-weight: 800; color: var(--gold2); line-height: 1; }
-.stat .l { margin-top: 12px; color: var(--mute); font-size: 24px; }
-.logo { vertical-align: middle; background: #fff; border-radius: 8px; padding: 4px; object-fit: contain; }
+.card h3 { font-size: 26px; margin-bottom: 12px; }
+.card p, .card li { color: var(--mute); font-size: 22px; line-height: 1.4; }
+.stat {
+  text-align:center; padding: 48px 24px;
+  min-height: 440px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap: 10px;
+}
+.stat .n { font-size: 96px; font-weight: 800; color: var(--gold2); line-height: 1; }
+.stat .l { color: var(--mute); font-size: 24px; }
+.logo-tile {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; border-radius: 14px; vertical-align: middle;
+  flex-shrink: 0;
+}
+.logo-tile img { object-fit: contain; display:block; }
+.logo-tile.dark { background:#0b1220; border:1px solid #2a3a52; }
 .chip {
-  display:inline-flex; align-items:center; gap:10px;
-  background:#fff; color:#111; border-radius: 999px; padding: 10px 18px 10px 10px;
+  display:inline-flex; align-items:center; gap:12px;
+  background:#fff; color:#111; border-radius: 999px; padding: 12px 22px 12px 12px;
   font-weight: 700; font-size: 22px;
 }
-.flow { display:flex; align-items:center; gap:14px; margin-top: 56px; flex-wrap:wrap; }
+.flow { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
 .flow .step {
   background: var(--panel); border:1px solid var(--line); border-radius: 16px;
-  padding: 22px 26px; font-size: 24px; font-weight: 700;
+  padding: 24px 28px; font-size: 24px; font-weight: 700;
 }
 .arrow { color: var(--gold); font-size: 36px; }
 .ui {
-  background: #0f141c; border: 1px solid #2c3648; border-radius: 16px; overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  background: #0c121c; border: 1px solid #2c3648; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,.4);
 }
-.ui-bar { background:#1b2230; padding: 12px 16px; display:flex; gap:8px; align-items:center; color:#8b93a7; font-size:14px; }
+.ui-bar { background:#151d2b; padding: 14px 18px; display:flex; gap:8px; align-items:center; color:#8b93a7; font-size:15px; }
 .dot { width:10px; height:10px; border-radius:50%; }
 .blur {
   display:inline-block; height: 18px; width: 140px; border-radius: 6px;
@@ -91,13 +126,13 @@ h1 { font-size: 64px; line-height: 1.08; font-weight: 800; max-width: 1600px; }
 .blur.sm { width: 90px; height: 14px; }
 .blur.xs { width: 70px; height: 12px; }
 .blur.phone { width: 110px; }
-.row { display:flex; gap: 18px; align-items:stretch; margin-top: 36px; }
+.row { display:flex; gap: 28px; align-items:stretch; }
 .heat { display:inline-block; padding: 4px 10px; border-radius: 999px; font-size: 16px; font-weight: 800; }
 .p1 { background:#3b1010; color:#fca5a5; }
 .p2 { background:#3b2a10; color:#fcd34d; }
 .p3 { background:#10261a; color:#6ee7b7; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-small.note { color:#6b7384; font-size: 16px; display:block; margin-top: 10px; }
+.logos { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 """
 
 SHELL = """<!doctype html><html><head><meta charset="utf-8"><style>{css}</style></head>
@@ -105,11 +140,44 @@ SHELL = """<!doctype html><html><head><meta charset="utf-8"><style>{css}</style>
 
 
 def foot(n: int) -> str:
-    return f'<div class="footer"><span>SuperSeed · Multi-agent OS</span><span>{n:02d} / 18</span></div>'
+    mark = logo("superseed.png", 22, dark=True)
+    return (
+        f'<div class="footer"><span class="brand">{mark} SuperSeed · Multi-agent OS</span>'
+        f"<span>{n:02d} / 18</span></div>"
+    )
+
+
+def hb(head: str, body: str) -> str:
+    return f'<div class="head">{head}</div><div class="body">{body}</div>'
+
+
+def auto_hb(inner: str) -> str:
+    import re
+
+    inner = inner.strip()
+    if 'class="head"' in inner:
+        return inner
+    match = re.search(
+        r"(.*?</h1>)(\s*<p class=\"sub\">.*?</p>)?(.*)",
+        inner,
+        flags=re.S,
+    )
+    if not match:
+        return inner
+    head = match.group(1) + (match.group(2) or "")
+    body = (match.group(3) or "").strip() or "<div></div>"
+    return hb(head, body)
 
 
 def slide(n: int, inner: str) -> str:
-    return SHELL.format(css=CSS, body=f'<div class="slide">{inner}{foot(n)}</div>')
+    inner = auto_hb(inner)
+    return SHELL.format(
+        css=CSS,
+        body=(
+            f'<div class="slide" data-document-role="page" data-label="Slide {n:02d}">'
+            f'<div class="stage">{inner}</div>{foot(n)}</div>'
+        ),
+    )
 
 
 def gmail_snapshot() -> str:
@@ -239,7 +307,6 @@ def mcp_snapshot() -> str:
         ("fireflies.png", "Fireflies", "Every meeting transcript"),
         ("lark.png", "Lark", "Full PM dashboard"),
         ("googlesheets.svg", "Google Sheets", "Pipeline data"),
-        ("canva.svg", "Canva", "Design + brand assets"),
     ]
     body = "".join(
         f'<div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #2a3344;">{logo(f, 28)} <b>{n}</b><span style="color:#9aa3b5"> — {d}</span> <span style="margin-left:auto;color:#34d399;">connected</span></div>'
@@ -264,39 +331,38 @@ def build_bodies() -> dict[int, str]:
     mcp = mcp_snapshot()
 
     bodies = {
-        1: f"""
-        <div class="kicker">SuperSeed Media</div>
-        <h1>How I built a multi-agent OS<br>for this company</h1>
-        <p class="sub">Cursor agents · GitHub repos · Automations · live tools</p>
-        <div class="row" style="margin-top:48px;">
-          <div style="flex:1.2">{g}</div>
-          <div style="flex:.8">{gh}</div>
-        </div>
-        """,
-        2: f"""
-        <h1>This company is impossible<br>without agents</h1>
-        <div class="grid cards-3">
+        1: hb(
+            """<div class="kicker">SuperSeed Media · Tammy Ng</div>
+          <h1>How I built a multi-agent OS<br>for this company</h1>
+          <p class="sub">Cursor agents · GitHub repos · Automations · live tools</p>""",
+            f'<div class="row"><div style="flex:1.2">{g}</div><div style="flex:.8">{gh}</div></div>',
+        ),
+        2: hb(
+            "<h1>This company is impossible<br>without agents</h1>",
+            """<div class="grid cards-3">
           <div class="card stat"><div class="n">8</div><div class="l">full-time staff</div></div>
           <div class="card stat"><div class="n">1</div><div class="l">freelancer</div></div>
           <div class="card stat"><div class="n">~25</div><div class="l">webinars / seminars a month</div></div>
-        </div>
-        """,
+        </div>""",
+        ),
         3: f"""
         <h1>Our ecosystem</h1>
         <div class="grid cards-3">
-          <div class="card" style="text-align:center;"><h3>Financial advisor teams</h3><p>Clients who sponsor the event</p></div>
-          <div class="card" style="text-align:center;border-color:var(--gold);"><h3>SuperSeed events</h3><p>Webinars + seminars in the middle</p></div>
-          <div class="card" style="text-align:center;"><h3>Expert speakers</h3><p>Content partners who teach</p></div>
+          <div class="card stat"><h3>Financial advisor teams</h3><p>Clients who sponsor the event</p></div>
+          <div class="card stat" style="border-color:var(--gold);">{logo('superseed.png', 56, dark=True)}<h3>SuperSeed events</h3><p>Webinars + seminars in the middle</p></div>
+          <div class="card stat"><h3>Expert speakers</h3><p>Content partners who teach</p></div>
         </div>
-        <div style="display:flex;gap:18px;margin-top:40px;align-items:center;flex-wrap:wrap;">
+        <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;">
           <span class="chip">{logo('sgpaincare.png', 28)} Singapore Paincare</span>
           <span class="chip">{logo('cpf.png', 28)} CPF Board</span>
-          <span class="chip" style="padding-left:18px;">Fund houses</span>
+          <span class="chip" style="padding-left:22px;">Fund houses</span>
         </div>
         """,
         4: f"""
-        <h1>We sell content IP that books appointments</h1>
-        <p class="sub">High-quality, high-intent financial planning appointments</p>
+        <div>
+          <h1>We sell content IP that books appointments</h1>
+          <p class="sub">High-quality, high-intent financial planning appointments</p>
+        </div>
         <div class="flow">
           <div class="step">Ads</div><div class="arrow">→</div>
           <div class="step">Landing page</div><div class="arrow">→</div>
@@ -308,56 +374,58 @@ def build_bodies() -> dict[int, str]:
         5: f"""
         <h1>Four apps. That’s the company OS.</h1>
         <div class="grid cards-4">
-          <div class="card stat">{logo('cursor.png', 64)}<div class="l" style="margin-top:18px;color:#fff;font-weight:700;">Cursor</div><p>Agents + automations</p></div>
-          <div class="card stat">{logo('github.svg', 64)}<div class="l" style="margin-top:18px;color:#fff;font-weight:700;">GitHub</div><p>Repos by function</p></div>
-          <div class="card stat">{logo('googlesheets.svg', 64)}<div class="l" style="margin-top:18px;color:#fff;font-weight:700;">Google Sheets</div><p>Pipeline data</p></div>
-          <div class="card stat">{logo('lark.png', 64)}<div class="l" style="margin-top:18px;color:#fff;font-weight:700;">Lark</div><p>Project management</p></div>
+          <div class="card stat">{logo('cursor.png', 72)}<div class="l" style="color:#fff;font-weight:700;">Cursor</div><p>Agents + automations</p></div>
+          <div class="card stat">{logo('github.svg', 72)}<div class="l" style="color:#fff;font-weight:700;">GitHub</div><p>Repos by function</p></div>
+          <div class="card stat">{logo('googlesheets.svg', 72)}<div class="l" style="color:#fff;font-weight:700;">Google Sheets</div><p>Pipeline data</p></div>
+          <div class="card stat">{logo('lark.png', 72)}<div class="l" style="color:#fff;font-weight:700;">Lark</div><p>Project management</p></div>
         </div>
         """,
         6: f"""
         <h1>Four systems. Not four extra headcount.</h1>
-        <div class="grid cards-4" style="margin-top:80px;">
-          <div class="card"><h3>Sales follow-up</h3><p>{logo('gmail.svg', 28)} {logo('googlesheets.svg', 28)}</p><p>Daily checklist · heat ranking</p></div>
-          <div class="card"><h3>Project management</h3><p>{logo('lark.png', 28)}</p><p>Template tasks, auto-created</p></div>
-          <div class="card"><h3>Event registration</h3><p class="mono">&lt;/&gt; code</p><p>Custom app on GitHub</p></div>
-          <div class="card"><h3>Asset generation</h3><p>{logo('openai.svg', 28)} {logo('netlify.svg', 28)}</p><p>LLMs + Netlify</p></div>
+        <div class="grid cards-4">
+          <div class="card stat"><h3>Sales follow-up</h3><div class="logos">{logo('gmail.svg', 40)} {logo('googlesheets.svg', 40)}</div><p>Daily checklist · heat ranking</p></div>
+          <div class="card stat"><h3>Project management</h3><div class="logos">{logo('lark.png', 40)}</div><p>Template tasks, auto-created</p></div>
+          <div class="card stat"><h3>Event registration</h3><p class="mono" style="font-size:28px;color:#fff;">&lt;/&gt; code</p><p>Custom app on GitHub</p></div>
+          <div class="card stat"><h3>Asset generation</h3><div class="logos">{logo('openai.svg', 40)} {logo('netlify.svg', 40)}</div><p>LLMs + Netlify</p></div>
         </div>
         """,
         7: f"""
         <h1>GitHub is the central brain</h1>
         <div class="row">
-          <div style="flex:1">{gh}</div>
-          <div class="card" style="flex:1;"><h3>Why repos</h3><p>Different departments ship different code. Agents work on the repo that owns the function.</p></div>
+          <div style="flex:1.2">{gh}</div>
+          <div class="card" style="flex:1;display:flex;flex-direction:column;justify-content:center;"><h3>Why repos</h3><p>Different departments ship different code. Agents work on the repo that owns the function.</p></div>
         </div>
         """,
         8: f"""
         <h1>One repo per department / function</h1>
-        <div class="grid" style="grid-template-columns: 1.2fr 1fr 1.4fr; align-items:center; margin-top:40px;">
-          <div class="card"><h3>Department</h3>
-            <p style="margin:16px 0;font-size:26px;color:#fff;">Sales · follow-up</p>
-            <p style="margin:16px 0;font-size:26px;color:#fff;">Events · registration</p>
-            <p style="margin:16px 0;font-size:26px;color:#fff;">Marketing · assets</p>
-            <p style="margin:16px 0;font-size:26px;color:#fff;">Ops</p>
+        <div class="grid" style="grid-template-columns: 1.2fr auto 1.5fr; align-items:stretch;">
+          <div class="card" style="display:flex;flex-direction:column;justify-content:center;"><h3>Department</h3>
+            <p style="margin:18px 0;font-size:28px;color:#fff;">Sales · follow-up</p>
+            <p style="margin:18px 0;font-size:28px;color:#fff;">Events · registration</p>
+            <p style="margin:18px 0;font-size:28px;color:#fff;">Marketing · assets</p>
+            <p style="margin:18px 0;font-size:28px;color:#fff;">Ops</p>
           </div>
-          <div style="text-align:center;font-size:48px;color:var(--gold);">→</div>
-          <div class="card"><h3>Tools the agents use</h3>
-            <p style="margin:14px 0;display:flex;gap:10px;align-items:center;">{logo('gmail.svg', 32)} {logo('googlesheets.svg', 32)} Gmail + Sheets only</p>
-            <p style="margin:14px 0;font-size:24px;color:#fff;">&lt;/&gt;  100% code</p>
-            <p style="margin:14px 0;display:flex;gap:10px;align-items:center;">{logo('openai.svg', 32)} {logo('netlify.svg', 32)} LLMs + Netlify</p>
-            <p style="margin:14px 0;display:flex;gap:10px;align-items:center;">{logo('lark.png', 32)} Lark app</p>
+          <div style="display:flex;align-items:center;font-size:56px;color:var(--gold);">→</div>
+          <div class="card" style="display:flex;flex-direction:column;justify-content:center;"><h3>Tools the agents use</h3>
+            <p style="margin:16px 0;display:flex;gap:12px;align-items:center;">{logo('gmail.svg', 36)} {logo('googlesheets.svg', 36)} Gmail + Sheets only</p>
+            <p style="margin:16px 0;font-size:26px;color:#fff;">&lt;/&gt;  100% code</p>
+            <p style="margin:16px 0;display:flex;gap:12px;align-items:center;">{logo('openai.svg', 36)} {logo('netlify.svg', 36)} LLMs + Netlify</p>
+            <p style="margin:16px 0;display:flex;gap:12px;align-items:center;">{logo('lark.png', 36)} Lark app</p>
           </div>
         </div>
         """,
         9: f"""
-        <h1>Agents don’t just chat.<br>They refine automations.</h1>
-        <p class="sub">Humans write the playbook. Cursor agents keep the engine sharp.</p>
+        <div>
+          <h1>Agents don’t just chat.<br>They refine automations.</h1>
+          <p class="sub">Humans write the playbook. Cursor agents keep the engine sharp.</p>
+        </div>
         <div class="row"><div style="flex:1">{g}</div></div>
         """,
         10: f"""
         <h1>Daily growth checklist, ranked by heat</h1>
         <div class="row">
           <div style="flex:1.4">{g}</div>
-          <div class="card" style="flex:.7;">
+          <div class="card" style="flex:.7;display:flex;flex-direction:column;justify-content:center;gap:12px;">
             <h3>What the agent does</h3>
             <p>1. Summarise the day’s activity</p>
             <p>2. Rate prospects (spiciness 🌶️)</p>
@@ -370,15 +438,17 @@ def build_bodies() -> dict[int, str]:
         <h1>100% recorded. Then the dashboard writes itself.</h1>
         <div class="flow">
           <div class="step">Meeting</div><div class="arrow">→</div>
-          <div class="step">Fireflies</div><div class="arrow">→</div>
+          <div class="step">{logo('fireflies.png', 28, dark=True)} Fireflies</div><div class="arrow">→</div>
           <div class="step">Agent extract</div><div class="arrow">→</div>
           <div class="step">Follow-up dashboard</div>
         </div>
         <div class="row"><div style="flex:1">{ff}</div></div>
         """,
         12: f"""
-        <h1>We don’t create tasks anymore</h1>
-        <p class="sub">Productized work. New opportunity → Lark template pack.</p>
+        <div>
+          <h1>We don’t create tasks anymore</h1>
+          <p class="sub">Productized work. New opportunity → Lark template pack.</p>
+        </div>
         <div class="row"><div style="flex:1">{lk}</div></div>
         """,
         13: f"""
@@ -386,8 +456,10 @@ def build_bodies() -> dict[int, str]:
         <div class="row"><div style="flex:1">{mcp}</div></div>
         """,
         14: f"""
-        <h1>Next: marketing OS, with Hypergrowth IP</h1>
-        <p class="sub">Paid Hypergrowth Summit attendee · Dennis Yu marketing suite</p>
+        <div>
+          <h1>Next: marketing OS, with Hypergrowth IP</h1>
+          <p class="sub">Paid Hypergrowth Summit attendee · Dennis Yu marketing suite</p>
+        </div>
         <div class="grid cards-3">
           <div class="card stat"><h3>SEO</h3><p>Agent-led</p></div>
           <div class="card stat"><h3>Paid audit</h3><p>Agent-led</p></div>
@@ -396,20 +468,19 @@ def build_bodies() -> dict[int, str]:
         """,
         15: f"""
         <h1>The SuperSeed agent OS</h1>
-        <div class="card" style="margin-top:40px;padding:40px;">
-          <div class="flow" style="margin-top:0;">
-            <div class="step">{logo('github.svg', 28)} GitHub repos</div>
+        <div class="card" style="padding:48px;">
+          <div class="flow">
+            <div class="step">{logo('github.svg', 32)} GitHub repos</div>
             <div class="arrow">→</div>
-            <div class="step">{logo('cursor.png', 28)} Cursor agents / automations</div>
+            <div class="step">{logo('cursor.png', 32)} Cursor agents / automations</div>
           </div>
-          <div class="flow">
-            <div class="step">{logo('gmail.svg', 22)} Gmail</div>
-            <div class="step">{logo('fireflies.png', 22)} Fireflies</div>
-            <div class="step">{logo('lark.png', 22)} Lark</div>
-            <div class="step">{logo('googlesheets.svg', 22)} Sheets</div>
-            <div class="step">{logo('canva.svg', 22)} Canva</div>
+          <div class="flow" style="margin-top:28px;">
+            <div class="step">{logo('gmail.svg', 28)} Gmail</div>
+            <div class="step">{logo('fireflies.png', 28, dark=True)} Fireflies</div>
+            <div class="step">{logo('lark.png', 28)} Lark</div>
+            <div class="step">{logo('googlesheets.svg', 28)} Sheets</div>
           </div>
-          <div class="flow">
+          <div class="flow" style="margin-top:28px;">
             <div class="step">Sales follow-up</div>
             <div class="step">PM templates</div>
             <div class="step">Events app</div>
@@ -420,10 +491,10 @@ def build_bodies() -> dict[int, str]:
         16: f"""
         <h1>Same team. Different operating system.</h1>
         <div class="grid cards-2">
-          <div class="card"><h3>Before</h3>
+          <div class="card" style="min-height:420px;display:flex;flex-direction:column;justify-content:center;gap:10px;"><h3>Before</h3>
             <p>Manual tasks</p><p>Notes after meetings</p><p>Follow-up in people’s heads</p><p>Assets from scratch</p>
           </div>
-          <div class="card" style="border-color:var(--gold);"><h3>After</h3>
+          <div class="card" style="min-height:420px;display:flex;flex-direction:column;justify-content:center;gap:10px;border-color:var(--gold);"><h3>After</h3>
             <p>Template tasks auto-created</p><p>Transcript → dashboard</p><p>🌶️ ranked daily checklist</p><p>Asset generation system</p>
           </div>
         </div>
@@ -431,15 +502,17 @@ def build_bodies() -> dict[int, str]:
         17: f"""
         <h1>How to copy this</h1>
         <div class="grid cards-4">
-          <div class="card"><h3>1</h3><p>Put work in GitHub by function</p></div>
-          <div class="card"><h3>2</h3><p>Connect MCP to real tools</p></div>
-          <div class="card"><h3>3</h3><p>Productize tasks</p></div>
-          <div class="card"><h3>4</h3><p>Automate daily ops + record every meeting</p></div>
+          <div class="card stat"><h3 style="font-size:56px;color:var(--gold2);">1</h3><p>Put work in GitHub by function</p></div>
+          <div class="card stat"><h3 style="font-size:56px;color:var(--gold2);">2</h3><p>Connect MCP to real tools</p></div>
+          <div class="card stat"><h3 style="font-size:56px;color:var(--gold2);">3</h3><p>Productize tasks</p></div>
+          <div class="card stat"><h3 style="font-size:56px;color:var(--gold2);">4</h3><p>Automate daily ops + record every meeting</p></div>
         </div>
         """,
         18: f"""
-        <h1>8 people. 25 events.<br>Agents as staff.</h1>
-        <p class="sub">This is how SuperSeed actually runs.</p>
+        <div>
+          <h1>8 people. 25 events.<br>Agents as staff.</h1>
+          <p class="sub">This is how SuperSeed actually runs.</p>
+        </div>
         <div class="row">
           <div style="flex:1">{g}</div>
           <div style="flex:1">{mcp}</div>
@@ -492,6 +565,13 @@ def main() -> None:
         p = SHOTS / name
         p.write_text(html, encoding="utf-8")
         screenshot(p, p.with_suffix(".png"))
+
+    from PIL import Image
+
+    pdf = ROOT / "superseed-agent-os.pdf"
+    pages = [Image.open(SLIDES / f"{n:02d}.png").convert("RGB") for n in range(1, 19)]
+    pages[0].save(pdf, save_all=True, append_images=pages[1:])
+    print("pdf", pdf)
 
     (SLIDES / "index.html").write_text(
         "<!doctype html><meta charset=utf-8><title>SuperSeed Agent OS deck</title>"
