@@ -1,6 +1,15 @@
 # SuperSeed multi-agent OS — 5-minute deck
 
-Download the whole deck: **[superseed-agent-os.pdf](../superseed-agent-os.pdf)**
+**Canva (on-brand, 18 slides):** https://www.canva.com/d/Y2d1kwxCLjzJYKC
+
+Brand kit used: SuperSeed Media.
+
+PNG/PDF fallback from the earlier HTML version:
+- [PDF](./superseed-agent-os.pdf)
+- [Slide 01](slides/01.png)
+
+
+Download the whole deck: **[superseed-agent-os.pdf](./superseed-agent-os.pdf)**
 
 Or open slides as images on this branch:
 
