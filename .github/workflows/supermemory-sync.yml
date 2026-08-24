@@ -1,0 +1,32 @@
+name: SuperMemory sync
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "**/*.md"
+      - "**/*.mdx"
+      - "**/*.markdown"
+      - "**/*.txt"
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "scripts/supermemory_sync.py"
+      - ".github/workflows/supermemory-sync.yml"
+  workflow_dispatch:
+jobs:
+  upsert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upsert allowlisted files
+        env:
+          SUPERMEMORY_API_KEY: ${{ secrets.SUPERMEMORY_API_KEY }}
+          SUPERMEMORY_CONTAINER_TAG: sm_org_shared
+          SUPERMEMORY_ID_PREFIX: brandandpr
+        run: |
+          if [ -z "$SUPERMEMORY_API_KEY" ]; then
+            echo "SUPERMEMORY_API_KEY secret is empty — skip ingest."
+            exit 0
+          fi
+          python3 scripts/supermemory_sync.py
