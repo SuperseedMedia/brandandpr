@@ -1,0 +1,117 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root {
+  --bg: #05070c;
+  --panel: #10161f;
+  --line: #243044;
+  --gold: #2ec4b6;
+  --gold2: #7ee7dc;
+  --blue: #3b82f6;
+  --ink: #f4f7fb;
+  --mute: #9aa8bc;
+  --red: #ef4444;
+  --ok: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; width: 1920px; height: 1080px; }
+.slide {
+  width: 1920px; height: 1080px; overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 88% 12%, rgba(46,196,182,.16) 0%, transparent 58%),
+    radial-gradient(800px 480px at 8% 88%, rgba(59,130,246,.12) 0%, transparent 55%),
+    var(--bg);
+  color: var(--ink); font-family: Inter, system-ui, sans-serif;
+  padding: 48px 96px 72px 108px; position: relative;
+  display: flex; flex-direction: column;
+}
+.slide:before {
+  content:""; position:absolute; left:0; top:0; bottom:0; width:10px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--blue) 100%);
+}
+.stage {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 28px;
+}
+.head { flex: 0 0 auto; display:flex; flex-direction:column; gap: 14px; }
+.body {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.kicker {
+  color: var(--gold); letter-spacing: .22em; text-transform: uppercase;
+  font-size: 16px; font-weight: 700;
+}
+h1 { font-size: 58px; line-height: 1.12; font-weight: 800; max-width: 1640px; }
+.sub { color: var(--mute); font-size: 26px; }
+.footer {
+  position:absolute; left:108px; right:96px; bottom:28px;
+  display:flex; justify-content:space-between; align-items:center;
+  color:#6b7384; font-size:16px;
+}
+.footer .brand { display:flex; align-items:center; gap:10px; }
+.grid { display:grid; gap: 28px; }
+.cards-4 { grid-template-columns: repeat(4, 1fr); }
+.cards-3 { grid-template-columns: repeat(3, 1fr); }
+.cards-2 { grid-template-columns: 1fr 1fr; }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 32px;
+}
+.card h3 { font-size: 26px; margin-bottom: 12px; }
+.card p, .card li { color: var(--mute); font-size: 22px; line-height: 1.4; }
+.stat {
+  text-align:center; padding: 48px 24px;
+  min-height: 440px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap: 10px;
+}
+.stat .n { font-size: 96px; font-weight: 800; color: var(--gold2); line-height: 1; }
+.stat .l { color: var(--mute); font-size: 24px; }
+.logo-tile {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; border-radius: 14px; vertical-align: middle;
+  flex-shrink: 0;
+}
+.logo-tile img { object-fit: contain; display:block; }
+.logo-tile.dark { background:#0b1220; border:1px solid #2a3a52; }
+.chip {
+  display:inline-flex; align-items:center; gap:12px;
+  background:#fff; color:#111; border-radius: 999px; padding: 12px 22px 12px 12px;
+  font-weight: 700; font-size: 22px;
+}
+.flow { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.flow .step {
+  background: var(--panel); border:1px solid var(--line); border-radius: 16px;
+  padding: 24px 28px; font-size: 24px; font-weight: 700;
+}
+.arrow { color: var(--gold); font-size: 36px; }
+.ui {
+  background: #0c121c; border: 1px solid #2c3648; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,.4);
+}
+.ui-bar { background:#151d2b; padding: 14px 18px; display:flex; gap:8px; align-items:center; color:#8b93a7; font-size:15px; }
+.dot { width:10px; height:10px; border-radius:50%; }
+.blur {
+  display:inline-block; height: 18px; width: 140px; border-radius: 6px;
+  background: linear-gradient(90deg, #3a4254, #6b7388, #3a4254);
+  filter: blur(3px); vertical-align: middle;
+}
+.blur.sm { width: 90px; height: 14px; }
+.blur.xs { width: 70px; height: 12px; }
+.blur.phone { width: 110px; }
+.row { display:flex; gap: 28px; align-items:stretch; }
+.heat { display:inline-block; padding: 4px 10px; border-radius: 999px; font-size: 16px; font-weight: 800; }
+.p1 { background:#3b1010; color:#fca5a5; }
+.p2 { background:#3b2a10; color:#fcd34d; }
+.p3 { background:#10261a; color:#6ee7b7; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.logos { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+</style></head>
+<body><div class="slide" data-document-role="page" data-label="Slide 03"><div class="stage"><div class="head"><h1>Our ecosystem</h1></div><div class="body"><div class="grid cards-3">
+          <div class="card stat"><h3>Financial advisor teams</h3><p>Clients who sponsor the event</p></div>
+          <div class="card stat" style="border-color:var(--gold);"><span class="logo-tile dark" style="width:76px;height:76px"><img src="../assets/logos/superseed.png" width="56" height="56" alt=""></span><h3>SuperSeed events</h3><p>Webinars + seminars in the middle</p></div>
+          <div class="card stat"><h3>Expert speakers</h3><p>Content partners who teach</p></div>
+        </div>
+        <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;">
+          <span class="chip"><span class="logo-tile" style="width:48px;height:48px"><img src="../assets/logos/sgpaincare.png" width="28" height="28" alt=""></span> Singapore Paincare</span>
+          <span class="chip"><span class="logo-tile" style="width:48px;height:48px"><img src="../assets/logos/cpf.png" width="28" height="28" alt=""></span> CPF Board</span>
+          <span class="chip" style="padding-left:22px;">Fund houses</span>
+        </div></div></div><div class="footer"><span class="brand"><span class="logo-tile dark" style="width:42px;height:42px"><img src="../assets/logos/superseed.png" width="22" height="22" alt=""></span> SuperSeed · Multi-agent OS</span><span>03 / 18</span></div></div></body></html>

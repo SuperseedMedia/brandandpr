@@ -1,0 +1,142 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root {
+  --bg: #05070c;
+  --panel: #10161f;
+  --line: #243044;
+  --gold: #2ec4b6;
+  --gold2: #7ee7dc;
+  --blue: #3b82f6;
+  --ink: #f4f7fb;
+  --mute: #9aa8bc;
+  --red: #ef4444;
+  --ok: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; width: 1920px; height: 1080px; }
+.slide {
+  width: 1920px; height: 1080px; overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 88% 12%, rgba(46,196,182,.16) 0%, transparent 58%),
+    radial-gradient(800px 480px at 8% 88%, rgba(59,130,246,.12) 0%, transparent 55%),
+    var(--bg);
+  color: var(--ink); font-family: Inter, system-ui, sans-serif;
+  padding: 48px 96px 72px 108px; position: relative;
+  display: flex; flex-direction: column;
+}
+.slide:before {
+  content:""; position:absolute; left:0; top:0; bottom:0; width:10px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--blue) 100%);
+}
+.stage {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 28px;
+}
+.head { flex: 0 0 auto; display:flex; flex-direction:column; gap: 14px; }
+.body {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.kicker {
+  color: var(--gold); letter-spacing: .22em; text-transform: uppercase;
+  font-size: 16px; font-weight: 700;
+}
+h1 { font-size: 58px; line-height: 1.12; font-weight: 800; max-width: 1640px; }
+.sub { color: var(--mute); font-size: 26px; }
+.footer {
+  position:absolute; left:108px; right:96px; bottom:28px;
+  display:flex; justify-content:space-between; align-items:center;
+  color:#6b7384; font-size:16px;
+}
+.footer .brand { display:flex; align-items:center; gap:10px; }
+.grid { display:grid; gap: 28px; }
+.cards-4 { grid-template-columns: repeat(4, 1fr); }
+.cards-3 { grid-template-columns: repeat(3, 1fr); }
+.cards-2 { grid-template-columns: 1fr 1fr; }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 32px;
+}
+.card h3 { font-size: 26px; margin-bottom: 12px; }
+.card p, .card li { color: var(--mute); font-size: 22px; line-height: 1.4; }
+.stat {
+  text-align:center; padding: 48px 24px;
+  min-height: 440px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap: 10px;
+}
+.stat .n { font-size: 96px; font-weight: 800; color: var(--gold2); line-height: 1; }
+.stat .l { color: var(--mute); font-size: 24px; }
+.logo-tile {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; border-radius: 14px; vertical-align: middle;
+  flex-shrink: 0;
+}
+.logo-tile img { object-fit: contain; display:block; }
+.logo-tile.dark { background:#0b1220; border:1px solid #2a3a52; }
+.chip {
+  display:inline-flex; align-items:center; gap:12px;
+  background:#fff; color:#111; border-radius: 999px; padding: 12px 22px 12px 12px;
+  font-weight: 700; font-size: 22px;
+}
+.flow { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.flow .step {
+  background: var(--panel); border:1px solid var(--line); border-radius: 16px;
+  padding: 24px 28px; font-size: 24px; font-weight: 700;
+}
+.arrow { color: var(--gold); font-size: 36px; }
+.ui {
+  background: #0c121c; border: 1px solid #2c3648; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,.4);
+}
+.ui-bar { background:#151d2b; padding: 14px 18px; display:flex; gap:8px; align-items:center; color:#8b93a7; font-size:15px; }
+.dot { width:10px; height:10px; border-radius:50%; }
+.blur {
+  display:inline-block; height: 18px; width: 140px; border-radius: 6px;
+  background: linear-gradient(90deg, #3a4254, #6b7388, #3a4254);
+  filter: blur(3px); vertical-align: middle;
+}
+.blur.sm { width: 90px; height: 14px; }
+.blur.xs { width: 70px; height: 12px; }
+.blur.phone { width: 110px; }
+.row { display:flex; gap: 28px; align-items:stretch; }
+.heat { display:inline-block; padding: 4px 10px; border-radius: 999px; font-size: 16px; font-weight: 800; }
+.p1 { background:#3b1010; color:#fca5a5; }
+.p2 { background:#3b2a10; color:#fcd34d; }
+.p3 { background:#10261a; color:#6ee7b7; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.logos { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+</style></head>
+<body><div class="slide" data-document-role="page" data-label="Slide 18"><div class="stage"><div class="head"><div>
+          <h1>8 people. 25 events.<br>Agents as staff.</h1>
+          <p class="sub">This is how SuperSeed actually runs.</p></div><div class="body"></div>
+        <div class="row">
+          <div style="flex:1">
+    <div class="ui" style="width:100%;height:100%;">
+      <div class="ui-bar"><span class="dot" style="background:#ff5f56"></span><span class="dot" style="background:#ffbd2e"></span><span class="dot" style="background:#27c93f"></span>
+      <span class="logo-tile" style="width:38px;height:38px"><img src="../assets/logos/gmail.svg" width="18" height="18" alt=""></span> Gmail · Daily Growth Checklist</div>
+      <div style="padding:18px 20px;background:#fff;color:#111;font-size:15px;">
+        <div style="color:#667085;letter-spacing:.12em;text-transform:uppercase;font-size:11px;">Superseed Media</div>
+        <div style="font-size:22px;font-weight:800;margin:4px 0 8px;">Daily Growth Checklist — 20 Aug 2026</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+          <span style="border:2px solid #344054;padding:2px 8px;font-weight:800;font-size:12px;">26 actions</span>
+          <span style="border:2px solid #b42318;color:#b42318;padding:2px 8px;font-weight:800;font-size:12px;">8 broken loops</span>
+          <span style="border:2px solid #344054;padding:2px 8px;font-weight:800;font-size:12px;">2 waits</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
+          <div style="background:#f2f4f7;padding:10px;text-align:center;border:1px solid #d0d5dd;"><div style="font-size:11px;color:#344054;">ZEN</div><div style="font-size:28px;font-weight:800;">9</div></div>
+          <div style="background:#f2f4f7;padding:10px;text-align:center;border:1px solid #d0d5dd;"><div style="font-size:11px;color:#344054;">TAMMY</div><div style="font-size:28px;font-weight:800;">6</div></div>
+          <div style="background:#f2f4f7;padding:10px;text-align:center;border:1px solid #d0d5dd;"><div style="font-size:11px;color:#344054;">ELICIA</div><div style="font-size:28px;font-weight:800;">11</div></div>
+        </div>
+        <div style="font-weight:800;margin-bottom:6px;">Priority follow-ups (PII blurred)</div>
+        <div>1. <span class="heat p1">P1 🌶️🌶️🌶️🌶️🌶️</span> <span class="blur"></span> · 1st Meeting Arranged · OVERDUE</div>
+        <div>2. <span class="heat p1">P1 🌶️🌶️🌶️🌶️</span> <span class="blur"></span> · Proposal / sign-off</div>
+        <div>3. <span class="heat p2">P2 🌶️🌶️🌶️</span> <span class="blur"></span> · Topic hold · confirm date</div>
+        <div>4. <span class="heat p2">P2 🌶️🌶️</span> <span class="blur"></span> · New opportunity · qualify intent</div>
+        <div style="margin-top:10px;color:#667085;font-size:12px;">Generated by prospect-follow-up-engine · routed by owner</div>
+      </div>
+    </div></div>
+          <div style="flex:1">
+    <div class="ui" style="width:100%;">
+      <div class="ui-bar"><span class="logo-tile" style="width:38px;height:38px"><img src="../assets/logos/cursor.png" width="18" height="18" alt=""></span> Cursor · MCP servers</div>
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #2a3344;"><span class="logo-tile" style="width:48px;height:48px"><img src="../assets/logos/gmail.svg" width="28" height="28" alt=""></span> <b>Gmail</b><span style="color:#9aa3b5"> — Inbox + Daily Growth Checklist</span> <span style="margin-left:auto;color:#34d399;">connected</span></div><div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #2a3344;"><span class="logo-tile" style="width:48px;height:48px"><img src="../assets/logos/fireflies.png" width="28" height="28" alt=""></span> <b>Fireflies</b><span style="color:#9aa3b5"> — Every meeting transcript</span> <span style="margin-left:auto;color:#34d399;">connected</span></div><div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #2a3344;"><span class="logo-tile" style="width:48px;height:48px"><img src="../assets/logos/lark.png" width="28" height="28" alt=""></span> <b>Lark</b><span style="color:#9aa3b5"> — Full PM dashboard</span> <span style="margin-left:auto;color:#34d399;">connected</span></div><div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #2a3344;"><span class="logo-tile" style="width:48px;height:48px"><img src="../assets/logos/googlesheets.svg" width="28" height="28" alt=""></span> <b>Google Sheets</b><span style="color:#9aa3b5"> — Pipeline data</span> <span style="margin-left:auto;color:#34d399;">connected</span></div>
+    </div></div>
+        </div></div></div><div class="footer"><span class="brand"><span class="logo-tile dark" style="width:42px;height:42px"><img src="../assets/logos/superseed.png" width="22" height="22" alt=""></span> SuperSeed · Multi-agent OS</span><span>18 / 18</span></div></div></body></html>
